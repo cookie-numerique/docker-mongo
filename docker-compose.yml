@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    volumes:
+      - /var/database/mongo:/data/db
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$DB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+    ports:
+      - 27017:27017
+    networks:
+      - mongo-network
+    expose:
+      - 27017
+
+networks:
+  mongo-network:
+    name: mongo-network
+    driver: bridge
