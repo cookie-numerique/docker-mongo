@@ -1,5 +1,7 @@
 
 print('Start #################################################################');
+
+print(process.env);
 db = db.getSiblingDB("mirabelle");
 
 db.createUser({
