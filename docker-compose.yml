@@ -7,10 +7,9 @@ services:
     restart: always
     volumes:
       - /var/database/mongo:/data/db
-    env_file: ./.env
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=$DB_ROOT_USERNAME
-      - MONGO_INITDB_ROOT_PASSWORD=$DB_ROOT_PASSWORD
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    env_file:
+      - .env
     ports:
       - 27017:27017
     networks:
