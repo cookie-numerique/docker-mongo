@@ -6,7 +6,7 @@ services:
     image: mongo
     restart: always
     volumes:
-      - /data/db:/data/db
+      - /var/database/mongo:/data/db
       - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     env_file:
       - .env
