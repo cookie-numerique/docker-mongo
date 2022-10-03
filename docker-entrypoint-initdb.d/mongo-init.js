@@ -5,9 +5,15 @@ print(process.env);
 db = db.getSiblingDB("mirabelle");
 
 db.createUser({
+  user: process.env.MONGO_USER_ROOT,
+  pwd:  process.env.MONGO_PASSWORD_ROOT,
+  roles: [{ role: 'root', db: 'admin' }],
+});
+
+db.createUser({
   user: process.env.MONGO_USER_MIKA,
   pwd:  process.env.MONGO_PASSWORD_MIKA,
-  roles: [{ role: 'root', db: 'admin' }],
+  roles: [{ role: 'readWrite', db: 'admin' }],
 });
 
 db.createUser({
