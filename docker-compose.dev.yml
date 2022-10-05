@@ -13,11 +13,11 @@ services:
     env_file:
       - .env
     ports:
-      - 38128:27017 #host:container
+      - 27018:27017 #host:container
     networks:
       - mongo-network
     expose:
-      - 27017
+      - 27018
 
 networks:
   mongo-network:
