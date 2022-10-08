@@ -1,15 +1,18 @@
 version: "3.7"
 
 services:
-  mongo:
-    container_name: mongo
+  mongodb:
+    container_name: mongodb
     image: mongo
     restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER_ROOT}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD_ROOT}
     volumes:
       - /var/database/mongo:/data/db
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
       - ./mongod.dev.conf:/etc/mongod.conf
-      - /opt/docker-apps/mongo/mongod.log:/var/log/mongodb/mongod.log
+      - /etc/ssl/mongodb.pem:/etc/ssl/mongodb.pem
+    command: ["--config", "/etc/mongod.conf"]
     env_file:
       - .env
     ports:
@@ -17,7 +20,7 @@ services:
     networks:
       - mongo-network
     expose:
-      - 27018
+      - 27017
 
 networks:
   mongo-network:
