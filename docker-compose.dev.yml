@@ -10,6 +10,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD_ROOT}
     volumes:
       - /var/database/mongo:/data/db
+      - /var/database-backup:/database-backup
       - ./mongod.dev.conf:/etc/mongod.conf
       - /etc/ssl/mongodb.pem:/etc/ssl/mongodb.pem
     command: ["--config", "/etc/mongod.conf"]
