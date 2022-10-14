@@ -1,7 +1,8 @@
 #!/bin/bash
-pathEnv=/opt/docker-apps/mongo/.env;
+pathEnv=/opt/docker-apps/docker-mongo/.env;
 
 if [ -f $pathEnv ]; then
+echo 'ici';
   export $(echo $(cat $pathEnv | sed 's/#.*//g'| xargs) | envsubst)
 fi
 
