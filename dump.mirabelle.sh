@@ -5,9 +5,11 @@ if [ -f $pathEnv ]; then
   export $(echo $(cat $pathEnv | sed 's/#.*//g'| xargs) | envsubst)
 fi
 
-echo "Sauvegarde dans $BACKUP_DIR ...";
+pathDump="$BACKUP_DIR$(date +'%m-%d-%Y')"
 
-docker exec -ti mongodb mongodump -u $MONGO_USER_BACKUP -p $MONGO_PASS_BACKUP --authenticationDatabase admin -d mirabelle -o $BACKUP_DIR --ssl --tlsInsecure;
+echo "Sauvegarde dans $pathDump ...";
+
+docker exec -ti mongodb mongodump -u $MONGO_USER_BACKUP -p $MONGO_PASS_BACKUP --authenticationDatabase admin -d mirabelle -o $pathDump --ssl --tlsInsecure;
 
 echo 'Sauvegarde terminé';
 
